@@ -107,8 +107,8 @@ function paint(target) {
 
 function deleteChar(target) {
   if (!target || !target.classList.contains("cell")) return;
-  target.textContent = invisibleChar;
-  target.style.backgroundColor = isOpaqueChar(invisibleChar) ? "white" : "transparent";
+  target.textContent = " ";
+  target.style.backgroundColor = "transparent";
 }
 
 pictureGrid.addEventListener("mousedown", (e) => {
@@ -132,6 +132,8 @@ pictureGrid.addEventListener("mousedown", (e) => {
             console.log("middle");
             break;
         case 2:
+            console.log(e.target.closest(".cell"));
+            
             painting = true;
             deleteChar(td.querySelector(".cell"));
             break;
@@ -141,18 +143,10 @@ pictureGrid.addEventListener("mousedown", (e) => {
 pictureGrid.addEventListener("mousemove", (e) => {
     if (!painting  || selectTool !== "✎") return;
     const span = e.target.closest(".cell");
-    switch (e.button) {
-        case 0:
-            if (selectTool === "✎") {
-                paint(span);
-            }
-            break;
-        case 2:
-            console.log("droit");
-            if (selectTool === "✎") {
-                deleteChar(span);
-            }
-            break;
+     if (e.buttons === 1) {        
+        paint(span);
+    } else if (e.buttons === 2) { 
+        deleteChar(span);
     }
 });
 
