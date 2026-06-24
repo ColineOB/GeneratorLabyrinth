@@ -1,0 +1,93 @@
+body {
+    font-family: 'Lucida Console',  'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+    white-space: break-spaces;
+    margin:0; padding:0;
+    font-size: 16px;
+    line-height: 16px;
+    image-rendering: pixelated;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.arraySize {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.primary {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 1rem;
+}
+
+.left-menu,
+.right-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.palette {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  gap: .8rem;}
+.tool-swatch, .char-swatch, .layer-swatch {
+  display: inline-block;
+  font-family: 'Lucida Console', 'Segoe UI Emoji', 'Noto Color Emoji', monospace;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  padding: 1.0rem .6rem;
+  background: #fff;
+  line-height: 1;
+  user-select: none;
+}
+
+.tool-swatch.active,
+.char-swatch.active,
+.layer-swatch.active {
+  outline: 2px solid #000;
+}
+
+/* Array */
+.grid-container {
+  display: grid;
+  position: relative;
+  margin: 30px;
+  width: fit-content;
+  height: fit-content;
+}
+.grid {
+  grid-area: 1 / 1;
+  border-spacing: 0;
+  border-collapse: separate;
+  padding: 4px;
+  border: 5px solid black;}
+.grid td { padding:0; }
+.grid td .cell {
+  display: inline-block;
+  white-space: pre;
+  width: 1ch; 
+  height: 1em;
+  vertical-align: top;
+  line-height: 1;
+  user-select: none;
+}
+#clearGrid {
+  z-index: 1;
+}
+
+#pictureGrid {
+  z-index: 2;
+}
+
+/* Filled cell style */
+.cell.filled {
+  background-color: white;
+}

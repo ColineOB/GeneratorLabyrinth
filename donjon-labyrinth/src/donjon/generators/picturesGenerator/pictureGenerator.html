@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Picture Generator</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="arraySize">
+            <label for="">Nombre de ligne : </label>
+            <input type="number" name="number" id="nbLigne">
+            <label for="">Nombre de Colonne : </label>
+            <input type="number" name="number" id="nbColonne">
+            <button class="btn" onclick="createGrid()">Créer</button>
+        </div>
+        <div class="primary">
+            <div class="left-menu">
+                <div id="tools" class="palette"></div>
+            </div>
+            <div class="grid-container">
+                <table id="clearGrid" class="grid"><tbody></tbody></table>
+                <table id="pictureGrid" class="grid"><tbody></tbody></table>
+            </div>
+            <div class="right-menu">
+                <div id="char" class="palette"></div>
+                <div id="layers"></div>
+            </div>
+        </div>
+       
+        <select name="Picture" id="type-picture">
+            <option value="donjon">Donjon</option>
+            <option value="monster">Monstre</option>
+        </select>
+        <div id="selectType"></div>
+        <button class="btn" onclick="save()">Save</button>
+
+        <script src="property.js"></script>
+        <script src="pictureGenerator.js"></script>
+        <script src="pictureSaver.js"></script>
+    </body>
+</html>
