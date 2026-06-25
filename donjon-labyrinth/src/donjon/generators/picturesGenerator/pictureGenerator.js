@@ -13,12 +13,15 @@ const invisibleChar = "◦"
 const tools = ["✎","▣", "✖"];
 var selectTool = "✎";
 let painting = false;
-var selectLayer = 0;
+var layersArray = [1];
+var selectLayer = 1;
+
 
 displayTool();
 displayCharacter();
 displayClearGrid()
 displayPictureGrid();
+layersDisplay();
 
 // Picture grid generation
 function displayClearGrid() {
@@ -200,4 +203,29 @@ function setCharAt(x, y, ch) {
   if (!td) return;
   const span = td.querySelector(".cell");
   if (span && span.textContent !== ch) span.textContent = ch;
+}
+
+function layersDisplay() {
+    layers.innerHTML = "";
+    for (const layer of layersArray) {
+        console.log("Couche :", layer);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = layer;
+        btn.className = "layer-swatch" + (layer === selectLayer ? " active" : "");
+        btn.setAttribute("aria-pressed", layer === selectLayer ? "true" : "false");
+
+        btn.addEventListener("click", () => {
+        selectLayer = layer;
+        layers.querySelectorAll(".layer-swatch").forEach(el => {
+            el.classList.remove("active");
+            el.setAttribute("aria-pressed", "false");
+        });
+        btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
+        console.log("Couche sélectionnée :", selectLayer);
+        });
+
+        layers.appendChild(btn);
+    }
 }
