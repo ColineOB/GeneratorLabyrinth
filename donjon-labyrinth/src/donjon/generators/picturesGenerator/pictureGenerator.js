@@ -218,7 +218,6 @@ function setCharAt(x, y, ch) {
 function layersDisplay() {
     layerstools.innerHTML = "";
     for (const layer of layersArray) {
-        console.log("Couche :", layer);
         const btn = document.createElement("button");
         btn.type = "button";
         btn.textContent = layer;
@@ -233,17 +232,17 @@ function layersDisplay() {
         });
         btn.classList.add("active");
         btn.setAttribute("aria-pressed", "true");
-        updateLayersZIndex();
+        updateLayersPointerEvents();
         });
 
         layerstools.appendChild(btn);
     }
 }
 
-function updateLayersZIndex() {
+function updateLayersPointerEvents() {
     for (const layer of layersArray) {
         const el = document.getElementById(`Layer ${layer}`);
-        if (el) el.style.zIndex = layer === selectLayer ? 10 : layer;
+        if (el) el.style.pointerEvents = layer === selectLayer ? "auto" : "none";
     }
 }
 
@@ -257,5 +256,5 @@ function addLayer() {
     newlayer.className = "grid";
     displayPictureGrid(newlayer);
     document.querySelector(".grid-container").appendChild(newlayer);
-    updateLayersZIndex();
+    updateLayersPointerEvents();
 }
