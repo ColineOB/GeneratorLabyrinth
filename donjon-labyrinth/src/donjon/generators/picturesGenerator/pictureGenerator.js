@@ -1,8 +1,8 @@
 const char = document.querySelector('#char');
 const clearGrid = document.querySelector('#clearGrid');
-const pictureGrid = document.querySelector('#pictureGrid');
 const toolsList = document.querySelector('#tools');
-const layers = document.querySelector('#layers');
+const layerstools = document.querySelector('#layers');
+const gridContainer = document.querySelector(".grid-container");
 
 
 var Height = 40;
@@ -13,15 +13,19 @@ const invisibleChar = "◦"
 const tools = ["✎","▣", "✖"];
 var selectTool = "✎";
 let painting = false;
-var layersArray = [1];
+var layersArray = [];
 var selectLayer = 1;
 
 
 displayTool();
 displayCharacter();
-displayClearGrid()
-displayPictureGrid();
+displayClearGrid();
+addLayer();
 layersDisplay();
+
+function getActiveLayer() {
+    return document.getElementById(`Layer ${selectLayer}`);
+}
 
 // Picture grid generation
 function displayClearGrid() {
@@ -36,8 +40,8 @@ function displayClearGrid() {
     }
     clearGrid.innerHTML = content;
 }
-function displayPictureGrid() {
-    pictureGrid.innerHTML = "";
+function displayPictureGrid(layerTable) {
+    layerTable.innerHTML = "";
     var content = "";
     for (let h = 0; h < Height; h++) {
         content += "<tr>";
@@ -46,7 +50,7 @@ function displayPictureGrid() {
         }
         content += "</tr>";
     }
-    pictureGrid.innerHTML = content;
+    layerTable.innerHTML = content;
 }
 // Character selection
 function displayCharacter() {
@@ -114,7 +118,10 @@ function deleteChar(target) {
   target.style.backgroundColor = "transparent";
 }
 
-pictureGrid.addEventListener("mousedown", (e) => {
+gridContainer.addEventListener("mousedown", (e) => {
+    const activeLayer = getActiveLayer();
+    if (!activeLayer || !activeLayer.contains(e.target)) return;
+
     const td = e.target.closest("td");
     if (!td) return;
   
@@ -143,8 +150,10 @@ pictureGrid.addEventListener("mousedown", (e) => {
     }
 });
 
-pictureGrid.addEventListener("mousemove", (e) => {
+gridContainer.addEventListener("mousemove", (e) => {
     if (!painting  || selectTool !== "✎") return;
+    const activeLayer = getActiveLayer();
+    if (!activeLayer || !activeLayer.contains(e.target)) return;
     const span = e.target.closest(".cell");
      if (e.buttons === 1) {        
         paint(span);
@@ -184,9 +193,10 @@ function floodFill(x, y, targetChar, replacementChar) {
 
 // return the TD element at (x,y)
 function getCellTd(x, y) {
-  if (x < 0 || y < 0 || x >= Width || y >= Height) return null;
-  
-  return pictureGrid.querySelector(`td[data-x="${x}"][data-y="${y}"]`);
+    if (x < 0 || y < 0 || x >= Width || y >= Height) return null;
+    const activeLayer = getActiveLayer();
+    if (!activeLayer) return null;
+    return activeLayer.querySelector(`td[data-x="${x}"][data-y="${y}"]`);
 }
 
 // get the character at (x,y)
@@ -206,7 +216,7 @@ function setCharAt(x, y, ch) {
 }
 
 function layersDisplay() {
-    layers.innerHTML = "";
+    layerstools.innerHTML = "";
     for (const layer of layersArray) {
         console.log("Couche :", layer);
         const btn = document.createElement("button");
@@ -217,15 +227,35 @@ function layersDisplay() {
 
         btn.addEventListener("click", () => {
         selectLayer = layer;
-        layers.querySelectorAll(".layer-swatch").forEach(el => {
+        layerstools.querySelectorAll(".layer-swatch").forEach(el => {
             el.classList.remove("active");
             el.setAttribute("aria-pressed", "false");
         });
         btn.classList.add("active");
         btn.setAttribute("aria-pressed", "true");
-        console.log("Couche sélectionnée :", selectLayer);
+        updateLayersZIndex();
         });
 
-        layers.appendChild(btn);
+        layerstools.appendChild(btn);
     }
+}
+
+function updateLayersZIndex() {
+    for (const layer of layersArray) {
+        const el = document.getElementById(`Layer ${layer}`);
+        if (el) el.style.zIndex = layer === selectLayer ? 10 : layer;
+    }
+}
+
+function addLayer() {
+    const newLayer = layersArray.length + 1;
+    layersArray.push(newLayer);
+    selectLayer = newLayer; 
+    layersDisplay();
+    const newlayer = document.createElement("table");
+    newlayer.id = `Layer ${newLayer}`;
+    newlayer.className = "grid";
+    displayPictureGrid(newlayer);
+    document.querySelector(".grid-container").appendChild(newlayer);
+    updateLayersZIndex();
 }

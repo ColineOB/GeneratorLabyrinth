@@ -37,7 +37,13 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-  gap: .8rem;}
+  gap: .8rem;
+}
+.char {
+  display: flex;
+  margin-top: 20px;
+  gap: .8rem;
+}
 .tool-swatch, .char-swatch, .layer-swatch {
   display: inline-block;
   font-family: 'Lucida Console', 'Segoe UI Emoji', 'Noto Color Emoji', monospace;
@@ -80,11 +86,8 @@ body {
   user-select: none;
 }
 #clearGrid {
-  z-index: 1;
-}
-
-#pictureGrid {
-  z-index: 2;
+    z-index: 0;
+    pointer-events: none;
 }
 
 /* Filled cell style */
