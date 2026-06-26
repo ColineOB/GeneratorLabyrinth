@@ -68,13 +68,16 @@ body {
   margin: 30px;
   width: fit-content;
   height: fit-content;
+  background-color: white
 }
 .grid {
   grid-area: 1 / 1;
   border-spacing: 0;
   border-collapse: separate;
   padding: 4px;
-  border: 5px solid black;}
+  border: 5px solid black;
+  background-color: transparent;
+}
 .grid td { padding:0; }
 .grid td .cell {
   display: inline-block;

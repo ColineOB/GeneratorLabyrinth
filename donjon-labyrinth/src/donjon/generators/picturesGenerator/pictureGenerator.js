@@ -107,15 +107,15 @@ function displayTool() {
 
 // Painting functionality
 function paint(target) {
-  if (!target || !target.classList.contains("cell")) return;
-  target.textContent = selectedChar;
-  target.style.backgroundColor = isOpaqueChar(selectedChar) ? "white" : "transparent";
+    if (!target || !target.classList.contains("cell")) return;
+    target.textContent = selectedChar;
+    target.parentElement.style.backgroundColor = "white";
 }
 
 function deleteChar(target) {
-  if (!target || !target.classList.contains("cell")) return;
-  target.textContent = " ";
-  target.style.backgroundColor = "transparent";
+    if (!target || !target.classList.contains("cell")) return;
+    target.textContent = " ";
+    target.parentElement.style.backgroundColor = "transparent"; 
 }
 
 gridContainer.addEventListener("mousedown", (e) => {
@@ -243,6 +243,7 @@ function updateLayersPointerEvents() {
     for (const layer of layersArray) {
         const el = document.getElementById(`Layer ${layer}`);
         if (el) el.style.pointerEvents = layer === selectLayer ? "auto" : "none";
+        el.style.zIndex = 2;
     }
 }
 
@@ -257,4 +258,5 @@ function addLayer() {
     displayPictureGrid(newlayer);
     document.querySelector(".grid-container").appendChild(newlayer);
     updateLayersPointerEvents();
+    
 }
