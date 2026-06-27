@@ -212,7 +212,10 @@ function setCharAt(x, y, ch) {
   const td = getCellTd(x, y);
   if (!td) return;
   const span = td.querySelector(".cell");
-  if (span && span.textContent !== ch) span.textContent = ch;
+  if (span && span.textContent !== ch) {
+        span.textContent = ch;
+        span.style.backgroundColor = ch === " " ? "transparent" : "white";
+    }
 }
 
 function layersDisplay() {
