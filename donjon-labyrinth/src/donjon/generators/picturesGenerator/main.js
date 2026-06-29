@@ -9,5 +9,7 @@ displayClearGrid();
 addLayer();
 layersDisplay();
 initEvents();
+
+// document.getElementById("addLayer").addEventListener("click", addLayer);
  
  

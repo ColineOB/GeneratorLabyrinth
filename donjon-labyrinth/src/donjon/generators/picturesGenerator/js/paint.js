@@ -27,6 +27,7 @@ export function setCharAt(x, y, ch) {
 }
  
 export function paint(target) {
+    console.log("paint called with:", target, selectedChar);
     if (!target || !target.classList.contains("cell")) return;
     if (target.textContent === selectedChar) return;
     target.textContent = selectedChar;
