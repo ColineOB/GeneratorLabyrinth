@@ -27,7 +27,7 @@ export function initEvents() {
                     paint(td.querySelector(".cell"));
                 } else if (selectTool === "▣") {
                     const target = getCharAt(x, y);
-                    floodFill(x, y, target, selectTool);
+                    floodFill(x, y, target);
                 }
                 e.preventDefault();
                 break;

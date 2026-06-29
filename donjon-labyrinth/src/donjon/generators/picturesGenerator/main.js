@@ -1,7 +1,7 @@
-import { displayClearGrid } from "./grid.js";
-import { addLayer, layersDisplay } from "./layers.js";
-import { displayTool, displayCharacter } from "./tools.js";
-import { initEvents } from "./events.js";
+import { displayClearGrid } from "./js/grid.js";
+import { addLayer, layersDisplay } from "./js/layers.js";
+import { displayTool, displayCharacter } from "./js/tools.js";
+import { initEvents } from "./js/events.js";
  
 displayTool();
 displayCharacter();
