@@ -1,3 +1,5 @@
+//old script for picture generator, now split into multiple files for better organization
+
 const char = document.querySelector('#char');
 const clearGrid = document.querySelector('#clearGrid');
 const toolsList = document.querySelector('#tools');

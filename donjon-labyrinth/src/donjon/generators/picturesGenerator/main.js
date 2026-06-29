@@ -10,6 +10,6 @@ addLayer();
 layersDisplay();
 initEvents();
 
-// document.getElementById("addLayer").addEventListener("click", addLayer);
+document.getElementById("addLayer").addEventListener("click", addLayer);
  
  

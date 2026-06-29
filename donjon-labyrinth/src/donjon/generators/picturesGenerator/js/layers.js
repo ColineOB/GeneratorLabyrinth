@@ -48,7 +48,7 @@ export function addLayer() {
     setSelectLayer(newLayer);
     layersDisplay();
     const newlayer = document.createElement("table");
-    newlayer.id = `layer ${newLayer}`;
+    newlayer.id = `Layer ${newLayer}`;
     newlayer.className = "grid";
     displayPictureGrid(newlayer);
     gridContainer.appendChild(newlayer);
