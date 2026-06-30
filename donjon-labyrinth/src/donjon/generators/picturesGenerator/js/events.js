@@ -1,8 +1,9 @@
 
-import { painting, selectTool, setPainting } from "./state.js";
+import { painting, selectTool, setPainting, currentStroke, setCurrentStroke } from "./state.js";
 import { getActiveLayer } from "./layers.js";
 import { paint, deleteChar, getCharAt } from "./paint.js";
 import { floodFill } from "./floodFill.js";
+import { pushHistory } from "./history.js";
  
 const gridContainer = document.querySelector(".grid-container");
  
@@ -57,6 +58,10 @@ export function initEvents() {
  
     window.addEventListener("mouseup", () => {
         setPainting(false);
+        if (currentStroke.length > 0) {
+        pushHistory(getActiveLayer().id, currentStroke);
+        setCurrentStroke([]);
+    }
     });
 }
  

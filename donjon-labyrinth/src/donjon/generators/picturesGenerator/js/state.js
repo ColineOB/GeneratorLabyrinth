@@ -9,9 +9,15 @@ export let selectTool = "✎";
 export let painting = false;
 export let layersArray = [];
 export let selectLayer = 1;
+export let historyStack = [];
+export let historyIndex = -1;
+export let currentStroke = [];
  
 export function setSelectedChar(val) { selectedChar = val; }
 export function setSelectTool(val) { selectTool = val; }
 export function setPainting(val) { painting = val; }
 export function setSelectLayer(val) { selectLayer = val; }
 export function setLayersArray(val) { layersArray = val; }
+export function setHistoryStack(val) { historyStack = val; }
+export function setHistoryIndex(val) { historyIndex = val; }
+export function setCurrentStroke(val) { currentStroke = val; }

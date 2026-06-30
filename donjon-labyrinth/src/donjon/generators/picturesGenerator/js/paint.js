@@ -1,5 +1,5 @@
 
-import { selectedChar, Width, Height } from "./state.js";
+import { selectedChar, Width, Height, currentStroke } from "./state.js";
 import { getActiveLayer } from "./layers.js";
  
 export function getCellTd(x, y) {
@@ -22,15 +22,20 @@ export function setCharAt(x, y, ch) {
     const span = td.querySelector(".cell");
     if (span && span.textContent !== ch) {
         span.textContent = ch;
-        span.style.backgroundColor = ch === " " ? "transparent" : "white";
+        td.style.backgroundColor = ch === " " ? "transparent" : "white";
     }
 }
  
 export function paint(target) {
     if (!target || !target.classList.contains("cell")) return;
     if (target.textContent === selectedChar) return;
+
+    const before = target.textContent;
+    const beforeColor = target.parentElement.style.backgroundColor;
     target.textContent = selectedChar;
     target.parentElement.style.backgroundColor = "white";
+
+    currentStroke.push({ td: target.parentElement, span: target, before, beforeColor, after: selectedChar, afterColor: "white" });
 }
  
 export function deleteChar(target) {
