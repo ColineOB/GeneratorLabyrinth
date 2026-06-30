@@ -21,3 +21,4 @@ export function setLayersArray(val) { layersArray = val; }
 export function setHistoryStack(val) { historyStack = val; }
 export function setHistoryIndex(val) { historyIndex = val; }
 export function setCurrentStroke(val) { currentStroke = val; }
+

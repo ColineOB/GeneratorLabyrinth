@@ -3,7 +3,8 @@ import { addLayer, layersDisplay } from "./js/layers.js";
 import { displayTool, displayCharacter } from "./js/tools.js";
 import { initEvents } from "./js/events.js";
 import { undoLastAction, redoLastAction } from "./js/history.js";
- 
+import { toggleReferenceGrid } from "./js/referenceGrid.js";
+
 displayTool();
 displayCharacter();
 displayClearGrid();
@@ -16,3 +17,4 @@ redoLastAction();
 document.getElementById("addLayer").addEventListener("click", addLayer);
 document.getElementById("undo").addEventListener("click", undoLastAction);
 document.getElementById("redo").addEventListener("click", redoLastAction);
+document.getElementById("toggleRef").addEventListener("click", toggleReferenceGrid);
